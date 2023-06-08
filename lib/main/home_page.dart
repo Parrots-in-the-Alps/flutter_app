@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vulcan_mobile_app/utils/app_bar.dart';
 import 'package:vulcan_mobile_app/utils/button.dart';
 import 'package:vulcan_mobile_app/write_nfc/_screens/pick_room_screen.dart';
 
@@ -8,10 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF455A64),
-        title: const Text('Ma page d\'accueil'),
-      ),
+      appBar: const VulcanAppBar(title: "ACCUEUIL"),
       body: Container(
         color: const Color(0xFF607D8B),
         child: Expanded(
