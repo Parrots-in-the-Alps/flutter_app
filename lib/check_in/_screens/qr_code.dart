@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:vulcan_mobile_app/check_in/_screens/booking_details.dart';
+import 'package:vulcan_mobile_app/providers/ReservationsProvider.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 
 class QRCode extends StatefulWidget {
@@ -12,7 +15,6 @@ class QRCode extends StatefulWidget {
 class _QRCodeState extends State<QRCode> {
   final GlobalKey qrKey = GlobalKey(debugLabel: "QR");
   QRViewController? controller;
-  String result = "";
 
   @override
   void dispose() {
@@ -24,7 +26,14 @@ class _QRCodeState extends State<QRCode> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-        result = scanData.code!;
+        Provider.of<ReservationProvider>(context, listen: false)
+            .reservation_id = scanData.code!;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const BookingDetails(),
+          ),
+        );
       });
     });
   }

@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vulcan_mobile_app/providers/ReservationsProvider.dart';
 import 'main/home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ReservationProvider()),
+      ],
+      child: const MyApp(),
+    ),
+    );
 }
 
 class MyApp extends StatelessWidget {

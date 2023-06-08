@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vulcan_mobile_app/providers/ReservationsProvider.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 
 class BookingDetails extends StatefulWidget {
@@ -15,6 +17,7 @@ class _BookingDetailsState extends State<BookingDetails> {
         appBar: const VulcanAppBar(title: "Booking Details"),
         body: Column(
           children: [
+            Text(Provider.of<ReservationProvider>(context, listen: false).reservation_id),
             IconButton(
               onPressed: () {},
               icon: const Icon(Icons.done),
