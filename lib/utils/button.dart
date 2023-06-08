@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
 class MenuButton extends StatelessWidget {
-  const MenuButton({super.key, required this.text});
+  const MenuButton({super.key, required this.text, required this.destination});
   final String text;
+  final Widget destination;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        // Action à effectuer lorsque le premier bouton est pressé
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => destination,
+          ),
+        );
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFFFF9800),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vulcan_mobile_app/utils/button.dart';
+import 'package:vulcan_mobile_app/write_nfc/_screens/pick_room_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,10 +19,11 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.all(24.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MenuButton(text: 'Check-in'),
-                MenuButton(text: 'Ecrire une clé'),
-                MenuButton(text: 'Lire une clé'),
+              children: const [
+                MenuButton(text: 'Check-in', destination: PickRoomScreen()),
+                MenuButton(
+                    text: 'Ecrire une clé', destination: PickRoomScreen()),
+                MenuButton(text: 'Lire une clé', destination: PickRoomScreen()),
               ],
             ),
           ),
