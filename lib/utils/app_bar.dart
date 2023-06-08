@@ -15,6 +15,7 @@ class _VulcanAppBarState extends State<VulcanAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: const Color(0xFF455A64),
       title: Text(widget.title),
       centerTitle: true,
       actions: [

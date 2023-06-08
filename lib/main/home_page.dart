@@ -9,10 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF455A64),
-        title: const Text('Ma page d\'accueil'),
-      ),
+      appBar: const VulcanAppBar(title: "ACCUEUIL"),
       body: Container(
         color: const Color(0xFF607D8B),
         child: const Expanded(
