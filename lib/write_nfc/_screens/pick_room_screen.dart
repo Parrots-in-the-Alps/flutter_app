@@ -8,7 +8,7 @@ class PickRoomScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const VulcanAppBar(title: 'Choisir une reservation'),
+      appBar: const VulcanAppBar(title: 'Choisir une chambre'),
       body: Container(
         color: const Color(0xFF607D8B),
         child: Expanded(
@@ -16,8 +16,8 @@ class PickRoomScreen extends StatelessWidget {
             padding: const EdgeInsets.all(24.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                RoomCard(),
+              children: [
+                MyCardWidget(),
               ],
             ),
           ),
