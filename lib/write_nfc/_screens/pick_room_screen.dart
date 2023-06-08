@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vulcan_mobile_app/utils/app_bar.dart';
 import 'package:vulcan_mobile_app/write_nfc/components/room_card.dart';
 
 class PickRoomScreen extends StatelessWidget {
@@ -7,10 +8,7 @@ class PickRoomScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF455A64),
-        title: const Text('Ma page d\'accueil'),
-      ),
+      appBar: const VulcanAppBar(title: 'Choisir une reservation'),
       body: Container(
         color: const Color(0xFF607D8B),
         child: Expanded(
