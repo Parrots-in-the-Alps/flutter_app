@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vulcan_mobile_app/utils/button.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

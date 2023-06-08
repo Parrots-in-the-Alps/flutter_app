@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class VulcanAppBar extends StatefulWidget {
+class VulcanAppBar extends StatefulWidget implements PreferredSizeWidget {
   const VulcanAppBar({super.key, required this.title});
 
-  final String title; // <-- Add this
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  final String title;
 
   @override
   State<VulcanAppBar> createState() => _VulcanAppBarState();
