@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 
 class QRCode extends StatefulWidget {

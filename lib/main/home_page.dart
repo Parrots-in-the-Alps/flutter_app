@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vulcan_mobile_app/check_in/_screens/qr_code.dart';
+import 'package:vulcan_mobile_app/utils/app_bar.dart';
 import 'package:vulcan_mobile_app/utils/button.dart';
 import 'package:vulcan_mobile_app/write_nfc/_screens/pick_room_screen.dart';
 
