@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vulcan_mobile_app/check_in/_screens/qr_code.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -19,7 +20,8 @@ class HomePage extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // Action à effectuer lorsque le premier bouton est pressé
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const QRCode()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFF9800),
