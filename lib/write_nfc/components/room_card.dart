@@ -71,7 +71,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
 
   Widget buildCard(Chambre chambre) {
     return Card(
-      color: Color(0xFF455A64), // Couleur de la card : 455A64
+      color: const Color(0xFF455A64), // Couleur de la card : 455A64
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -80,28 +80,28 @@ class _MyCardWidgetState extends State<MyCardWidget> {
             Text(
               chambre
                   .chambreName, // Utilisation de la variable pour le nom de la chambre
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'N° ${chambre.chambreNumber}', // Utilisation de la variable pour le numéro de chambre
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               children: [
                 TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor:
-                        Color(0xFF455A64), // Couleur du fond du bouton : 455A64
-                    side: BorderSide(
+                    backgroundColor: const Color(
+                        0xFF455A64), // Couleur du fond du bouton : 455A64
+                    side: const BorderSide(
                         color: Colors
                             .orange), // Couleur des contours du bouton : orange
                   ),
@@ -111,17 +111,17 @@ class _MyCardWidgetState extends State<MyCardWidget> {
                   child: Text(
                     chambre
                         .chambreButtonText, // Utilisation de la variable pour le texte du bouton
-                    style: TextStyle(
+                    style: const TextStyle(
                       color:
                           Colors.orange, // Couleur du texte du bouton : orange
                     ),
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   chambre
                       .chambreRightText, // Utilisation de la variable pour le texte à droite du bouton
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.white,
                   ),
