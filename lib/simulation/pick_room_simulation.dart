@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vulcan_mobile_app/simulation/access_simulation.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 import 'package:vulcan_mobile_app/utils/list_room_card.dart';
 
@@ -17,7 +18,9 @@ class PickRommSimulation extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                MyCardWidget(button_title: "Simuler un accès"),
+                MyCardWidget(
+                    button_title: "Simuler un accès",
+                    widgetRedirection: AccessSimulation()),
               ],
             ),
           ),

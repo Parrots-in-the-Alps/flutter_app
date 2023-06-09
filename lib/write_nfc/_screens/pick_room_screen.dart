@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 import 'package:vulcan_mobile_app/utils/list_room_card.dart';
+import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc.dart';
 
 class PickRoomScreen extends StatelessWidget {
   const PickRoomScreen({super.key});
@@ -17,7 +18,9 @@ class PickRoomScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                MyCardWidget(button_title: "Créer une clé"),
+                MyCardWidget(
+                    button_title: "Créer une clé",
+                    widgetRedirection: WriteNfc()),
               ],
             ),
           ),

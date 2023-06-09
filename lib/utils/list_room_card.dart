@@ -3,12 +3,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:vulcan_mobile_app/models/chambre.dart';
 
-import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc.dart';
-
 class MyCardWidget extends StatefulWidget {
-  const MyCardWidget({super.key, required this.button_title});
+  const MyCardWidget(
+      {super.key, required this.button_title, required this.widgetRedirection});
 
   final String button_title;
+  final Widget widgetRedirection;
 
   @override
   _MyCardWidgetState createState() => _MyCardWidgetState();
@@ -105,7 +105,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const WriteNfc(),
+                        builder: (context) => widget.widgetRedirection,
                       ),
                     );
                   },
