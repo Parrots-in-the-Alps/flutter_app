@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:vulcan_mobile_app/models/chambre.dart';
 
 import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc.dart';
 
@@ -33,16 +34,9 @@ class _MyCardWidgetState extends State<MyCardWidget> {
         final List<dynamic> chambresData = data['data'];
 
         // Créer une liste de chambres à partir des données
-        List<Chambre> chambresList = [];
-        for (var chambreData in chambresData) {
-          Chambre chambre = Chambre(
-            chambreName: chambreData['name'],
-            chambreNumber: chambreData['number'].toString(),
-            chambreButtonText: 'Créer une clé',
-            chambreRightText: chambreData['type'],
-          );
-          chambresList.add(chambre);
-        }
+        List<Chambre> chambresList = chambresData.map((chambreData) {
+          return Chambre.fromJson(chambreData);
+        }).toList();
 
         // Mettre à jour l'état avec la liste de chambres
         setState(() {
@@ -80,7 +74,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              chambre.chambreName,
+              chambre.name,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -89,7 +83,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
             ),
             const SizedBox(height: 8),
             Text(
-              'N° ${chambre.chambreNumber}',
+              'N° ${chambre.number}',
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.white,
@@ -111,17 +105,16 @@ class _MyCardWidgetState extends State<MyCardWidget> {
                       ),
                     );
                   },
-                  child: Text(
-                    chambre.chambreButtonText,
-                    style: const TextStyle(
+                  child: const Text(
+                    'Créer une clé',
+                    style: TextStyle(
                       color: Colors.orange,
                     ),
                   ),
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  chambre
-                      .chambreRightText, // Utilisation de la variable pour le texte à droite du bouton
+                  chambre.type,
                   style: const TextStyle(
                     fontSize: 16,
                     color: Colors.white,
@@ -134,18 +127,4 @@ class _MyCardWidgetState extends State<MyCardWidget> {
       ),
     );
   }
-}
-
-class Chambre {
-  final String chambreName;
-  final String chambreNumber;
-  final String chambreButtonText;
-  final String chambreRightText;
-
-  Chambre({
-    required this.chambreName,
-    required this.chambreNumber,
-    required this.chambreButtonText,
-    required this.chambreRightText,
-  });
 }

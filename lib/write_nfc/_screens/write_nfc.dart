@@ -22,7 +22,7 @@ class WriteNfc extends StatelessWidget {
                 'Chambre pour x personnes \n reservation n 124 \n chambre 404',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -36,7 +36,7 @@ class WriteNfc extends StatelessWidget {
                 'Mettre la carte sur le téléphone',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
