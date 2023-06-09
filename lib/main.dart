@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vulcan_mobile_app/main/home_page.dart';
 import 'package:vulcan_mobile_app/providers/ReservationsProvider.dart';
-import 'package:vulcan_mobile_app/simulation/_screens/simulation_failed.dart';
 
 void main() {
   runApp(
