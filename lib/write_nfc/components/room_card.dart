@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc.dart';
+
 class MyCardWidget extends StatefulWidget {
   @override
   _MyCardWidgetState createState() => _MyCardWidgetState();
@@ -59,7 +61,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 500, // Hauteur spécifiée pour le conteneur de la liste
+      height: 600,
       child: ListView.builder(
         itemCount: chambres.length,
         itemBuilder: (context, index) {
@@ -71,15 +73,14 @@ class _MyCardWidgetState extends State<MyCardWidget> {
 
   Widget buildCard(Chambre chambre) {
     return Card(
-      color: const Color(0xFF455A64), // Couleur de la card : 455A64
+      color: const Color(0xFF455A64),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              chambre
-                  .chambreName, // Utilisation de la variable pour le nom de la chambre
+              chambre.chambreName,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -88,7 +89,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
             ),
             const SizedBox(height: 8),
             Text(
-              'N° ${chambre.chambreNumber}', // Utilisation de la variable pour le numéro de chambre
+              'N° ${chambre.chambreNumber}',
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.white,
@@ -99,21 +100,21 @@ class _MyCardWidgetState extends State<MyCardWidget> {
               children: [
                 TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: const Color(
-                        0xFF455A64), // Couleur du fond du bouton : 455A64
-                    side: const BorderSide(
-                        color: Colors
-                            .orange), // Couleur des contours du bouton : orange
+                    backgroundColor: const Color(0xFF455A64),
+                    side: const BorderSide(color: Colors.orange),
                   ),
                   onPressed: () {
-                    // Action à effectuer lorsqu'on appuie sur le bouton "Créer une clé"
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const WriteNfc(),
+                      ),
+                    );
                   },
                   child: Text(
-                    chambre
-                        .chambreButtonText, // Utilisation de la variable pour le texte du bouton
+                    chambre.chambreButtonText,
                     style: const TextStyle(
-                      color:
-                          Colors.orange, // Couleur du texte du bouton : orange
+                      color: Colors.orange,
                     ),
                   ),
                 ),
