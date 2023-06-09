@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vulcan_mobile_app/main/home_page.dart';
 import 'package:vulcan_mobile_app/providers/ReservationsProvider.dart';
-import 'main/home_page.dart';
+import 'check_in/_screens/booking_validated.dart';
+// import 'main/home_page.dart';
 
 void main() {
   runApp(
@@ -11,7 +13,7 @@ void main() {
       ],
       child: const MyApp(),
     ),
-    );
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'Vulcan App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
-      home: const HomePage(),
+      home: const BookingValidated(),
     );
   }
 }
