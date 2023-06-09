@@ -26,6 +26,7 @@ class _QRCodeState extends State<QRCode> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       setState(() {
+        controller.pauseCamera();
         Provider.of<ReservationProvider>(context, listen: false)
             .reservation_id = scanData.code!;
         Navigator.push(
@@ -34,6 +35,7 @@ class _QRCodeState extends State<QRCode> {
             builder: (context) => const BookingDetails(),
           ),
         );
+        controller.resumeCamera();
       });
     });
   }
