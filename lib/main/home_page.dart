@@ -13,12 +13,12 @@ class HomePage extends StatelessWidget {
       appBar: const VulcanAppBar(title: "ACCUEUIL"),
       body: Container(
         color: const Color(0xFF607D8B),
-        child: Expanded(
+        child: const Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: EdgeInsets.all(24.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
+              children: [
                 MenuButton(text: 'Check-in', destination: QRCode()),
                 MenuButton(
                     text: 'Ecrire une clé', destination: PickRoomScreen()),
