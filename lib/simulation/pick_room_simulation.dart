@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 import 'package:vulcan_mobile_app/utils/list_room_card.dart';
 
-class PickRoomScreen extends StatelessWidget {
-  const PickRoomScreen({super.key});
+class PickRommSimulation extends StatelessWidget {
+  const PickRommSimulation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class PickRoomScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                MyCardWidget(button_title: "Créer une clé"),
+                MyCardWidget(button_title: "Simuler un accès"),
               ],
             ),
           ),

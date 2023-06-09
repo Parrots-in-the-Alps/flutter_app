@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vulcan_mobile_app/check_in/_screens/qr_code.dart';
+import 'package:vulcan_mobile_app/simulation/pick_room_simulation.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 import 'package:vulcan_mobile_app/utils/button.dart';
 import 'package:vulcan_mobile_app/write_nfc/_screens/pick_room_screen.dart';
@@ -22,7 +23,8 @@ class HomePage extends StatelessWidget {
                 MenuButton(text: 'Check-in', destination: QRCode()),
                 MenuButton(
                     text: 'Ecrire une clé', destination: PickRoomScreen()),
-                MenuButton(text: 'Lire une clé', destination: PickRoomScreen()),
+                MenuButton(
+                    text: 'Lire une clé', destination: PickRommSimulation()),
               ],
             ),
           ),

@@ -6,6 +6,10 @@ import 'package:vulcan_mobile_app/models/chambre.dart';
 import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc.dart';
 
 class MyCardWidget extends StatefulWidget {
+  const MyCardWidget({super.key, required this.button_title});
+
+  final String button_title;
+
   @override
   _MyCardWidgetState createState() => _MyCardWidgetState();
 }
@@ -105,9 +109,9 @@ class _MyCardWidgetState extends State<MyCardWidget> {
                       ),
                     );
                   },
-                  child: const Text(
-                    'Créer une clé',
-                    style: TextStyle(
+                  child: Text(
+                    widget.button_title,
+                    style: const TextStyle(
                       color: Colors.orange,
                     ),
                   ),
