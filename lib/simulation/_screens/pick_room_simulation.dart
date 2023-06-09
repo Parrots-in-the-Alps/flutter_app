@@ -12,12 +12,12 @@ class PickRommSimulation extends StatelessWidget {
       appBar: const VulcanAppBar(title: 'Choisir une chambre'),
       body: Container(
         color: const Color(0xFF607D8B),
-        child: const Expanded(
+        child: Expanded(
           child: Padding(
-            padding: EdgeInsets.all(24.0),
+            padding: const EdgeInsets.all(24.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
+              children: const [
                 MyCardWidget(
                     button_title: "Simuler un accès",
                     widgetRedirection: AccessSimulation()),

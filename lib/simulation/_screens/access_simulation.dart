@@ -13,11 +13,11 @@ class AccessSimulation extends StatelessWidget {
             .size
             .width, // Définir la largeur à la largeur de l'écran
         color: const Color(0xFF607D8B),
-        child: const Padding(
-          padding: EdgeInsets.all(24.0),
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
+            children: const [
               Icon(
                 Icons.nfc,
                 color: Color(0xFF455A64),
