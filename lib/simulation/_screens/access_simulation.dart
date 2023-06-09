@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 
-class WriteNfc extends StatelessWidget {
-  const WriteNfc({super.key});
+class AccessSimulation extends StatelessWidget {
+  const AccessSimulation({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const VulcanAppBar(title: 'Ecrire une clé'),
+      appBar: const VulcanAppBar(title: 'Simuler un accès'),
       body: Container(
         width: MediaQuery.of(context)
             .size
@@ -18,22 +18,13 @@ class WriteNfc extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                'Chambre pour x personnes \n reservation n 124 \n chambre 404',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
               Icon(
                 Icons.nfc,
                 color: Color(0xFF455A64),
                 size: 128,
               ),
               Text(
-                'Mettre la carte sur le téléphone',
+                'Mettre la carte sur le téléphone pour simuler un accès',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:vulcan_mobile_app/simulation/_screens/access_simulation.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 import 'package:vulcan_mobile_app/utils/list_room_card.dart';
-import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc.dart';
 
-class PickRoomScreen extends StatelessWidget {
-  const PickRoomScreen({super.key});
+class PickRommSimulation extends StatelessWidget {
+  const PickRommSimulation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,8 @@ class PickRoomScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MyCardWidget(
-                    button_title: "Créer une clé",
-                    widgetRedirection: WriteNfc()),
+                    button_title: "Simuler un accès",
+                    widgetRedirection: AccessSimulation()),
               ],
             ),
           ),
