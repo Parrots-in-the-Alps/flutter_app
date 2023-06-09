@@ -9,6 +9,7 @@ class BookingValidated extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color(0xFF607D8B),
         appBar: const VulcanAppBar(title: "Booking Validated"),
         body: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -18,7 +19,7 @@ class BookingValidated extends StatelessWidget {
               RawMaterialButton(
                 onPressed: () {},
                 elevation: 2.0,
-                fillColor: Colors.white,
+                fillColor: const Color(0xFF07B456),
                 padding: const EdgeInsets.all(15.0),
                 shape: const CircleBorder(),
                 child: const Icon(
