@@ -63,7 +63,7 @@ class WriteNFCValidated extends StatelessWidget {
                   shape: const CircleBorder(),
                   child: const Icon(
                     Icons.done,
-                    size: 40.0,
+                    size: 60.0,
                     color: Colors.white,
                   ),
                 ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 
-class SimulationValidated extends StatelessWidget {
-  const SimulationValidated({super.key});
+class SimulationFailed extends StatelessWidget {
+  const SimulationFailed({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +16,18 @@ class SimulationValidated extends StatelessWidget {
               RawMaterialButton(
                 onPressed: () {},
                 elevation: 2.0,
-                fillColor: const Color(0xFF07B456),
+                fillColor: const Color(0xFFD32F2F),
                 padding: const EdgeInsets.all(30.0),
                 shape: const CircleBorder(),
                 child: const Icon(
-                  Icons.done,
+                  Icons.warning,
                   size: 60.0,
                   color: Colors.white,
                 ),
               ),
               const Text(
-                "Accès validé !",
+                "Carte vide !\nAccès refusé !",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
                   color: Colors.white,
