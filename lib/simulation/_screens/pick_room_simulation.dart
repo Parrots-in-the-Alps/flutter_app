@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vulcan_mobile_app/simulation/access_simulation.dart';
+import 'package:vulcan_mobile_app/simulation/_screens/access_simulation.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 import 'package:vulcan_mobile_app/utils/list_room_card.dart';
 
