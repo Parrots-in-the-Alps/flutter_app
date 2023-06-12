@@ -12,12 +12,12 @@ class PickRoomScreen extends StatelessWidget {
       appBar: const VulcanAppBar(title: 'Choisir une chambre'),
       body: Container(
         color: const Color(0xFF607D8B),
-        child: Expanded(
+        child: const Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: EdgeInsets.all(24.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
+              children: [
                 MyCardWidget(
                     button_title: "Créer une clé",
                     widgetRedirection: WriteNfc()),

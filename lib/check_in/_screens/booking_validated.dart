@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vulcan_mobile_app/main/home_page.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 import 'package:vulcan_mobile_app/utils/button.dart';
+import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc.dart';
 
 class BookingValidated extends StatelessWidget {
   const BookingValidated({super.key});
@@ -28,7 +29,7 @@ class BookingValidated extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              const MenuButton(text: "Écrire une clé", destination: HomePage()),
+              const MenuButton(text: "Écrire une clé", destination: WriteNfc()),
               const MenuButton(text: "Accueuil", destination: HomePage()),
             ],
           ),

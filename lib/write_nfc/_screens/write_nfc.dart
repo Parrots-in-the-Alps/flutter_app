@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import 'package:provider/provider.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc_validated.dart';
+
+import '../../providers/ReservationsProvider.dart';
 
 class WriteNfc extends StatefulWidget {
   const WriteNfc({super.key});
@@ -11,12 +14,17 @@ class WriteNfc extends StatefulWidget {
 }
 
 class _WriteNfcState extends State<WriteNfc> {
-  final String _dataToWrite =
-      "Hello NFC 🏆"; //remplacer par le tag_nfc récupérer
+  String _dataToWrite = "Hello NFC 🏆"; //remplacer par le tag_nfc récupérer
 
   @override
   initState() {
     super.initState();
+    Provider.of<ReservationProvider>(context, listen: false)
+        .validateReservation(int.parse(
+            Provider.of<ReservationProvider>(context, listen: false)
+                .reservation_id));
+    _dataToWrite =
+        Provider.of<ReservationProvider>(context, listen: false).nfc_tag;
     writeData(_dataToWrite);
   }
 
@@ -88,10 +96,24 @@ class _WriteNfcState extends State<WriteNfc> {
         print("successfuly write");
         NfcManager.instance.stopSession();
         setState(() {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const WriteNFCValidated()),
-          );
+          var validWriteNfc = Provider.of<ReservationProvider>(context,
+                  listen: false)
+              .openNaaNoor(
+                  Provider.of<ReservationProvider>(context, listen: false)
+                      .nfc_tag,
+                  int.parse(
+                      Provider.of<ReservationProvider>(context, listen: false)
+                          .reservation_id));
+          if (validWriteNfc == true) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const WriteNFCValidated()),
+            );
+          } else {
+            //TODO ajout alertDialog erreur confirmation write nfc
+            print("confirmation failed");
+          }
         });
       } catch (e) {
         NfcManager.instance.stopSession(errorMessage: e.toString());
