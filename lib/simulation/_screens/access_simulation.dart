@@ -14,7 +14,7 @@ class AccessSimulation extends StatefulWidget {
 }
 
 class _AccessSimulationState extends State<AccessSimulation> {
-  late Future<NfcTag?> _scannedTag = Future.value(null); //nfc_tag + room_id
+  late Future<NfcTag?> _scannedTag = Future.value(null); //nfc_tag
 
   @override
   initState() {

@@ -14,7 +14,6 @@ class _WriteNfcState extends State<WriteNfc> {
   final String _dataToWrite =
       "Hello NFC 🏆"; //remplacer par le tag_nfc récupérer
 
-
   @override
   initState() {
     super.initState();
@@ -30,11 +29,11 @@ class _WriteNfcState extends State<WriteNfc> {
             .size
             .width, // Définir la largeur à la largeur de l'écran
         color: const Color(0xFF607D8B),
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
+        child: const Padding(
+          padding: EdgeInsets.all(24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
+            children: [
               Text(
                 'Chambre pour x personnes \n reservation n 124 \n chambre 404',
                 textAlign: TextAlign.center,
@@ -96,8 +95,7 @@ class _WriteNfcState extends State<WriteNfc> {
         });
       } catch (e) {
         NfcManager.instance.stopSession(errorMessage: e.toString());
-        setState(() {
-        });
+        setState(() {});
         print(e.toString());
       }
     });
