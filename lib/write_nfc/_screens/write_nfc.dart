@@ -13,11 +13,11 @@ class WriteNfc extends StatelessWidget {
             .size
             .width, // Définir la largeur à la largeur de l'écran
         color: const Color(0xFF607D8B),
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
+        child: const Padding(
+          padding: EdgeInsets.all(24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
+            children: [
               Text(
                 'Chambre pour x personnes \n reservation n 124 \n chambre 404',
                 textAlign: TextAlign.center,
