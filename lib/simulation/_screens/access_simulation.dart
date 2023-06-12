@@ -14,11 +14,7 @@ class AccessSimulation extends StatefulWidget {
 }
 
 class _AccessSimulationState extends State<AccessSimulation> {
-  late Future<NfcTag?> _scannedTag =
-      Future.value(null); //résultat de la lecture de la carte NFC
-
-  bool _isScanning = true;
-  //true parce qu'on scan direct quand on arrive sur cet écran
+  late Future<NfcTag?> _scannedTag = Future.value(null); //nfc_tag + room_id
 
   @override
   initState() {
@@ -101,7 +97,6 @@ class _AccessSimulationState extends State<AccessSimulation> {
       }, onDiscovered: (NfcTag tag) async {
         setState(() {
           _scannedTag = Future.value(tag);
-          _isScanning = false;
           Navigator.push(
             context,
             MaterialPageRoute(

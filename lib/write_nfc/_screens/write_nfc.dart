@@ -11,16 +11,9 @@ class WriteNfc extends StatefulWidget {
 }
 
 class _WriteNfcState extends State<WriteNfc> {
-  bool _isScanning =
-      true; //true parce qu'on scan direct quand on arrive sur cet écran
-  bool? _writeSuccess;
-  final bool _validationSuccess = false;
-
   final String _dataToWrite =
       "Hello NFC 🏆"; //remplacer par le tag_nfc récupérer
 
-  late Future<String> _generatedKey;
-  final Future<bool?> _linkKeyToReservation = Future.value(false);
 
   @override
   initState() {
@@ -83,8 +76,6 @@ class _WriteNfcState extends State<WriteNfc> {
       var ndef = Ndef.from(tag);
       if (ndef == null || !ndef.isWritable) {
         print('Tag is not writable');
-        _isScanning = false;
-        _writeSuccess = false;
         NfcManager.instance.stopSession();
         return;
       }
@@ -98,8 +89,6 @@ class _WriteNfcState extends State<WriteNfc> {
         print("successfuly write");
         NfcManager.instance.stopSession();
         setState(() {
-          _writeSuccess = true;
-          _isScanning = false;
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const WriteNFCValidated()),
@@ -108,8 +97,6 @@ class _WriteNfcState extends State<WriteNfc> {
       } catch (e) {
         NfcManager.instance.stopSession(errorMessage: e.toString());
         setState(() {
-          _writeSuccess = false;
-          _isScanning = false;
         });
         print(e.toString());
       }
