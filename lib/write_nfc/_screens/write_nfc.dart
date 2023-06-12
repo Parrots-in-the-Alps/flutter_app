@@ -1,8 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
+import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc_validated.dart';
 
-class WriteNfc extends StatelessWidget {
+class WriteNfc extends StatefulWidget {
   const WriteNfc({super.key});
+
+  @override
+  State<WriteNfc> createState() => _WriteNfcState();
+}
+
+class _WriteNfcState extends State<WriteNfc> {
+  bool _isScanning =
+      true; //true parce qu'on scan direct quand on arrive sur cet écran
+  bool? _writeSuccess;
+  final bool _validationSuccess = false;
+
+  final String _dataToWrite =
+      "Hello NFC 🏆"; //remplacer par le tag_nfc récupérer
+
+  late Future<String> _generatedKey;
+  final Future<bool?> _linkKeyToReservation = Future.value(false);
+
+  @override
+  initState() {
+    super.initState();
+    writeData(_dataToWrite);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,5 +70,49 @@ class WriteNfc extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<NfcTag?> scannedTag = Future.value(null);
+
+  //Démarre la session d'écriture NFC
+  void writeData(String keyCode) async {
+    NfcManager.instance.startSession(onError: (error) async {
+      print(error.details);
+      print(error.message);
+    }, onDiscovered: (NfcTag tag) async {
+      var ndef = Ndef.from(tag);
+      if (ndef == null || !ndef.isWritable) {
+        print('Tag is not writable');
+        _isScanning = false;
+        _writeSuccess = false;
+        NfcManager.instance.stopSession();
+        return;
+      }
+
+      NdefMessage message = NdefMessage(
+        [NdefRecord.createText(keyCode)],
+      );
+
+      try {
+        await ndef.write(message);
+        print("successfuly write");
+        NfcManager.instance.stopSession();
+        setState(() {
+          _writeSuccess = true;
+          _isScanning = false;
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const WriteNFCValidated()),
+          );
+        });
+      } catch (e) {
+        NfcManager.instance.stopSession(errorMessage: e.toString());
+        setState(() {
+          _writeSuccess = false;
+          _isScanning = false;
+        });
+        print(e.toString());
+      }
+    });
   }
 }
