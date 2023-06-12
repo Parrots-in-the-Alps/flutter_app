@@ -30,8 +30,8 @@ class _QRCodeState extends State<QRCode> {
         Provider.of<ReservationProvider>(context, listen: false)
             .reservation_id = scanData.code!;
 
-        //faire la fonction api pour la validation reservation
-        //et afficher la dialog (voir nft_app_final) si != 200
+        Provider.of<ReservationProvider>(context, listen: false)
+            .reservationIsValid(int.parse(scanData.code!));
 
         Navigator.push(
           context,

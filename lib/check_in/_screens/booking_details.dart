@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vulcan_mobile_app/check_in/_screens/booking_validated.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 
 import '../../providers/ReservationsProvider.dart';
@@ -18,27 +19,31 @@ class _BookingDetailsState extends State<BookingDetails> {
         backgroundColor: const Color(0xFF607D8B),
         appBar: const VulcanAppBar(title: "Booking Details"),
         body: Padding(
-          padding: const EdgeInsets.all(40.0),
+          padding: const EdgeInsets.symmetric(vertical: 40.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
                 children: [
                   Card(
                     color: const Color(0xFF455A64),
                     child: SizedBox(
-                      width: 300,
-                      height: 100,
+                      width: 330,
+                      height: 110,
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Text(
                               "Réservation ID: ${Provider.of<ReservationProvider>(context, listen: false).reservation_id}",
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 18),
+                            ),
+                            const SizedBox(
+                              height: 10,
                             ),
                             const Text(
                               "Room type: Standard",
@@ -46,7 +51,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                                   TextStyle(color: Colors.white, fontSize: 18),
                             ),
                             const Text(
-                              "Date: 19/06/2023 au 26/06/2023",
+                              "Du 19/06/2023 au 26/06/2023",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 18),
                             ),
@@ -55,20 +60,27 @@ class _BookingDetailsState extends State<BookingDetails> {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 25,
+                  ),
                   const Card(
                     color: Color(0xFF455A64),
                     child: SizedBox(
-                      width: 300,
-                      height: 100,
+                      width: 330,
+                      height: 120,
                       child: Padding(
                         padding: EdgeInsets.all(15.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Text(
-                              "Nom Prénom",
+                              "Mougnagna Betsy",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                            SizedBox(
+                              height: 15,
                             ),
                             Text(
                               "Nombre de personne: ",
@@ -88,7 +100,13 @@ class _BookingDetailsState extends State<BookingDetails> {
                 ],
               ),
               RawMaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BookingValidated()),
+                  );
+                },
                 elevation: 2.0,
                 fillColor: const Color(0xFF07B456),
                 padding: const EdgeInsets.all(30.0),
