@@ -1,14 +1,15 @@
 import 'package:http/http.dart' as http;
 
 class SimultationApi {
-  Future<bool> openDoor(String nfc_tag, int room_id, int reservation_id) async {
+
+//ajout check card
+
+  ///simulation ouverture porte
+  Future<bool> openNaaNoor(String nfcTag, int reservationId) async {
     var response = await http.post(
         Uri.parse("https://vulcan-7bh9.onrender.com/api/openNaaNoor"),
-        body: {
-          "nfc_tag": nfc_tag,
-          "room_id": room_id,
-          "reservation_id": reservation_id
-        });
+        body: {"reservation_id": reservationId, "nfc_tag": nfcTag});
+    print(response);
     switch (response.statusCode) {
       case 203:
         return true;

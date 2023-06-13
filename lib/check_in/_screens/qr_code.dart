@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:vulcan_mobile_app/check_in/_screens/booking_details.dart';
-import 'package:vulcan_mobile_app/providers/ReservationsProvider.dart';
+import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 
 class QRCode extends StatefulWidget {
@@ -28,7 +28,7 @@ class _QRCodeState extends State<QRCode> {
       setState(() {
         controller.pauseCamera();
         Provider.of<ReservationProvider>(context, listen: false)
-            .reservation_id = scanData.code!;
+            .reservationId = scanData.code!;
 
         Provider.of<ReservationProvider>(context, listen: false)
             .reservationIsValid(int.parse(scanData.code!));

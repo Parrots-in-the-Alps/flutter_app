@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:provider/provider.dart';
+import 'package:vulcan_mobile_app/providers/simulation_provider.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
+import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
 import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc_validated.dart';
-
-import '../../providers/ReservationsProvider.dart';
 
 class WriteNfc extends StatefulWidget {
   const WriteNfc({super.key});
@@ -22,9 +22,9 @@ class _WriteNfcState extends State<WriteNfc> {
     Provider.of<ReservationProvider>(context, listen: false)
         .validateReservation(int.parse(
             Provider.of<ReservationProvider>(context, listen: false)
-                .reservation_id));
+                .reservationId));
     _dataToWrite =
-        Provider.of<ReservationProvider>(context, listen: false).nfc_tag;
+        Provider.of<ReservationProvider>(context, listen: false).nfcTag;
     writeData(_dataToWrite);
   }
 
@@ -96,14 +96,14 @@ class _WriteNfcState extends State<WriteNfc> {
         print("successfuly write");
         NfcManager.instance.stopSession();
         setState(() {
-          var validWriteNfc = Provider.of<ReservationProvider>(context,
+          var validWriteNfc = Provider.of<SimulationProvider>(context,
                   listen: false)
               .openNaaNoor(
                   Provider.of<ReservationProvider>(context, listen: false)
-                      .nfc_tag,
+                      .nfcTag,
                   int.parse(
                       Provider.of<ReservationProvider>(context, listen: false)
-                          .reservation_id));
+                          .reservationId));
           if (validWriteNfc == true) {
             Navigator.push(
               context,

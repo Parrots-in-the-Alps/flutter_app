@@ -97,6 +97,7 @@ class _AccessSimulationState extends State<AccessSimulation> {
       }, onDiscovered: (NfcTag tag) async {
         setState(() {
           _scannedTag = Future.value(tag);
+          //setNfc ?? /TODO
           Navigator.push(
             context,
             MaterialPageRoute(

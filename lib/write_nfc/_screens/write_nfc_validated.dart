@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vulcan_mobile_app/providers/ReservationsProvider.dart';
+import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 
 class WriteNFCValidated extends StatelessWidget {
@@ -9,7 +9,7 @@ class WriteNFCValidated extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String reservationID =
-        Provider.of<ReservationProvider>(context, listen: false).reservation_id;
+        Provider.of<ReservationProvider>(context, listen: false).reservationId;
 
     return Scaffold(
         // backgroundColor: const Color(0xFF607D8B),
@@ -44,7 +44,7 @@ class WriteNFCValidated extends StatelessWidget {
                             ),
                           )
                         : Text(
-                            "reservation n${Provider.of<ReservationProvider>(context, listen: false).reservation_id}"),
+                            "reservation n${Provider.of<ReservationProvider>(context, listen: false).reservationId}"),
                     const Text(
                       "Chambre 404",
                       style: TextStyle(

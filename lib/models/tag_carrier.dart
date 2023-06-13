@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final tagCarrier = tagCarrierFromJson(jsonString);
-
 import 'dart:convert';
 
 TagCarrier tagCarrierFromJson(String str) =>

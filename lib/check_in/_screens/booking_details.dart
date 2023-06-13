@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:vulcan_mobile_app/check_in/_screens/booking_validated.dart';
 import 'package:vulcan_mobile_app/utils/app_bar.dart';
 
-import '../../providers/ReservationsProvider.dart';
+import '../../providers/reservation_provider.dart';
 
 class BookingDetails extends StatefulWidget {
   const BookingDetails({super.key});
@@ -38,7 +38,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Text(
-                              "Réservation ID: ${Provider.of<ReservationProvider>(context, listen: false).reservation_id}",
+                              "Réservation ID: ${Provider.of<ReservationProvider>(context, listen: false).reservationId}",
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 18),
                             ),
@@ -83,12 +83,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                               height: 15,
                             ),
                             Text(
-                              "Nombre de personne: ",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            ),
-                            Text(
-                              "2 adultes",
+                              "Nombre de personne: 2 adultes",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 18),
                             ),
