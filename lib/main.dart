@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vulcan_mobile_app/main/home_page.dart';
 import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
+import 'package:vulcan_mobile_app/utils/new_list_room_card.dart';
 
 void main() {
   runApp(
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
       title: 'Vulcan App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
-      home: const HomePage(),
+      home: const MyCardWidget2(
+          buttonTitle: 'zizi', widgetRedirection: HomePage()),
     );
   }
 }
