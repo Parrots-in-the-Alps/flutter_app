@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:js';
 
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:vulcan_mobile_app/models/reservation_carrier.dart';
+import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
 
 import '../models/tag_carrier.dart';
 
@@ -19,11 +22,10 @@ class ReservationApi {
   }
 
   /// génère un nfc_tag
-  Future<String> validateReservation(int reservationId) async {
+  Future<String> validateReservation(String reservationId) async {
     var response = await http.post(
         Uri.parse("https://vulcan-7bh9.onrender.com/api/validateresa"),
         body: {"reservation_id": reservationId});
-    print(response);
     if (response.statusCode == 203) {
       return TagCarrier.fromJson(jsonDecode(response.body)).nfcTag;
     } else {

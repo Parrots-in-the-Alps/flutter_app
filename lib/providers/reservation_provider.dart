@@ -6,19 +6,19 @@ class ReservationProvider extends ChangeNotifier {
   String reservationId = "";
   // late bool _reservationIsValid;
   late ReservationCarrier reservations;
-  late ReservationCarrier validReservation;
+  late Future<ReservationCarrier> validReservation;
   String nfcTag = ""; //TODO error ? LateNotInitialized
   // late bool _nfcSet;
 
-  Future<ReservationCarrier> isReservationValide(String reservationId) async {
-    validReservation =
-        await ReservationApi().isReservationValide(reservationId);
+  // Future<ReservationCarrier> isReservationValide(String reservationId) async {
+  //   validReservation =
+  //       await ReservationApi().isReservationValide(reservationId);
 
-    notifyListeners();
-    return validReservation;
-  }
+  //   notifyListeners();
+  //   return validReservation;
+  // }
 
-  Future<String> validateReservation(int reservationId) async {
+  Future<String> validateReservation(String reservationId) async {
     nfcTag = await ReservationApi().validateReservation(reservationId);
 
     notifyListeners();

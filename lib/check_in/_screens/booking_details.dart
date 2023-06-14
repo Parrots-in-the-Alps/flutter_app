@@ -83,6 +83,11 @@ class _BookingDetailsState extends State<BookingDetails> {
                     ),
                     RawMaterialButton(
                       onPressed: () {
+                        ReservationApi().validateReservation(
+                            Provider.of<ReservationProvider>(context,
+                                    listen: false)
+                                .reservationId);
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
