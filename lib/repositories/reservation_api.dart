@@ -1,24 +1,20 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:vulcan_mobile_app/models/reservation_carrier.dart';
 
 import '../models/tag_carrier.dart';
 
 class ReservationApi {
   /// check de la réservation
-  Future<bool> reservationIsValid(int reservationId) async {
+  Future<ReservationCarrier> isReservationValide(int reservationId) async {
     var response = await http.post(
         Uri.parse("https://vulcan-7bh9.onrender.com/api/isresavalide"),
         body: {"reservation_id": reservationId});
-    switch (response.statusCode) {
-      case 203:
-        return true;
-      case 403:
-        return false;
-      default:
-        print("code http inccorect");
-        return false;
+    if (response.statusCode == 203) {
+      return reservationCarrierFromJson(response.body);
     }
+    throw Exception('Reservation non valide');
   }
 
   /// génère un nfc_tag
@@ -32,5 +28,15 @@ class ReservationApi {
     } else {
       return "open nee nooor";
     }
+  }
+
+  // Retourne la liste des reservations en cours
+  Future<ReservationCarrier> getRollingReservation() async {
+    var response = await http.get(Uri.parse(
+        'https://vulcan-7bh9.onrender.com/api/getRollingReservations'));
+    if (response.statusCode == 203) {
+      return reservationCarrierFromJson(response.body);
+    }
+    throw Exception(response.statusCode);
   }
 }

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:vulcan_mobile_app/models/reservation_carrier.dart';
 import 'package:vulcan_mobile_app/repositories/reservation_api.dart';
 
 class ReservationProvider extends ChangeNotifier {
   String reservationId = "";
-  late bool _reservationIsValid;
+  // late bool _reservationIsValid;
+  late ReservationCarrier reservations;
+  late ReservationCarrier validReservation;
   String nfcTag = ""; //TODO error ? LateNotInitialized
   // late bool _nfcSet;
 
-  Future<bool> reservationIsValid(int reservationId) async {
-    _reservationIsValid =
-        await ReservationApi().reservationIsValid(reservationId);
+  Future<ReservationCarrier> isReservationValide(int reservationId) async {
+    validReservation =
+        await ReservationApi().isReservationValide(reservationId);
 
     notifyListeners();
-    return _reservationIsValid;
+    return validReservation;
   }
 
   Future<String> validateReservation(int reservationId) async {
@@ -20,5 +23,11 @@ class ReservationProvider extends ChangeNotifier {
 
     notifyListeners();
     return nfcTag;
+  }
+
+  Future<ReservationCarrier> getRollingReservation() async {
+    reservations = await ReservationApi().getRollingReservation();
+    notifyListeners();
+    return reservations;
   }
 }

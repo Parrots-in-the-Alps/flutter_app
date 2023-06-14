@@ -27,11 +27,11 @@ class _QRCodeState extends State<QRCode> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         controller.pauseCamera();
-        Provider.of<ReservationProvider>(context, listen: false)
-            .reservationId = scanData.code!;
+        Provider.of<ReservationProvider>(context, listen: false).reservationId =
+            scanData.code!;
 
         Provider.of<ReservationProvider>(context, listen: false)
-            .reservationIsValid(int.parse(scanData.code!));
+            .isReservationValide(int.parse(scanData.code!));
 
         Navigator.push(
           context,
