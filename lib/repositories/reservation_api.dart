@@ -12,9 +12,9 @@ class ReservationApi {
         Uri.parse("https://vulcan-7bh9.onrender.com/api/isresavalide"),
         body: {"reservation_id": reservationId});
     if (response.statusCode == 203) {
-      print(response.body);
       return reservationCarrierFromJson(response.body);
     }
+
     throw Exception('Reservation non valide');
   }
 
