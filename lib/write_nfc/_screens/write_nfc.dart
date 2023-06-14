@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:vulcan_mobile_app/providers/simulation_provider.dart';
-import 'package:vulcan_mobile_app/utils/app_bar.dart';
+import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
 import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
 import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc_validated.dart';
 

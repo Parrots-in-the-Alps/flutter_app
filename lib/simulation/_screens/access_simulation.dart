@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:vulcan_mobile_app/simulation/_screens/simulation_failed.dart';
 import 'package:vulcan_mobile_app/simulation/_screens/simulation_validated.dart';
-import 'package:vulcan_mobile_app/utils/app_bar.dart';
+import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
 
 class AccessSimulation extends StatefulWidget {
   const AccessSimulation({super.key});

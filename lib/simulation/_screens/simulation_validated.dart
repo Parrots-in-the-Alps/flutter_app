@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vulcan_mobile_app/utils/app_bar.dart';
+import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
 
 class SimulationValidated extends StatelessWidget {
   const SimulationValidated({super.key});

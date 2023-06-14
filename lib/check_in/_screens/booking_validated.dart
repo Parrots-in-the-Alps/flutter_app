@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vulcan_mobile_app/main/home_page.dart';
-import 'package:vulcan_mobile_app/utils/app_bar.dart';
-import 'package:vulcan_mobile_app/utils/button.dart';
+import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
+import 'package:vulcan_mobile_app/utils/menu_button.dart';
 import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc.dart';
 
 class BookingValidated extends StatelessWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vulcan_mobile_app/check_in/_screens/qr_code.dart';
-import 'package:vulcan_mobile_app/simulation/_screens/pick_room_simulation.dart';
-import 'package:vulcan_mobile_app/utils/app_bar.dart';
-import 'package:vulcan_mobile_app/utils/button.dart';
-import 'package:vulcan_mobile_app/write_nfc/_screens/pick_room_screen.dart';
+import 'package:vulcan_mobile_app/simulation/_screens/listing_room.dart';
+import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
+import 'package:vulcan_mobile_app/utils/menu_button.dart';
+import 'package:vulcan_mobile_app/write_nfc/_screens/listing_reservation.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,9 +22,9 @@ class HomePage extends StatelessWidget {
               children: [
                 MenuButton(text: 'Check-in', destination: QRCode()),
                 MenuButton(
-                    text: 'Ecrire une clé', destination: PickRoomScreen()),
+                    text: 'Ecrire une clé', destination: ListingReservation()),
                 MenuButton(
-                    text: 'Simulation', destination: PickRommSimulation()),
+                    text: 'Simulation', destination: ListingRoom()),
               ],
             ),
           ),

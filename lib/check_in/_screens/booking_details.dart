@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vulcan_mobile_app/check_in/_screens/booking_validated.dart';
-import 'package:vulcan_mobile_app/utils/app_bar.dart';
+import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
 
 import '../../providers/reservation_provider.dart';
 
