@@ -10,7 +10,7 @@ class ReservationProvider extends ChangeNotifier {
   String nfcTag = ""; //TODO error ? LateNotInitialized
   // late bool _nfcSet;
 
-  Future<ReservationCarrier> isReservationValide(int reservationId) async {
+  Future<ReservationCarrier> isReservationValide(String reservationId) async {
     validReservation =
         await ReservationApi().isReservationValide(reservationId);
 

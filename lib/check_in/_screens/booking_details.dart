@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:vulcan_mobile_app/check_in/_screens/booking_validated.dart';
 import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
 
+import '../../models/reservation_carrier.dart';
 import '../../providers/reservation_provider.dart';
 
 class BookingDetails extends StatefulWidget {
@@ -13,6 +14,15 @@ class BookingDetails extends StatefulWidget {
 }
 
 class _BookingDetailsState extends State<BookingDetails> {
+  @override
+  initState() {
+    super.initState();
+    Provider.of<ReservationProvider>(context, listen: false)
+        .isReservationValide(
+            Provider.of<ReservationProvider>(context, listen: false)
+                .reservationId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,15 +55,21 @@ class _BookingDetailsState extends State<BookingDetails> {
                             const SizedBox(
                               height: 10,
                             ),
-                            const Text(
-                              "Room type: Standard",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                            Text(
+                              Provider.of<ReservationProvider>(context,
+                                      listen: false)
+                                  .validReservation
+                                  .reservations[0]
+                                  .room
+                                  .type
+                                  .name,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 18),
                             ),
-                            const Text(
-                              "Du 19/06/2023 au 26/06/2023",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                            Text(
+                              "Du ${Provider.of<ReservationProvider>(context, listen: false).validReservation.reservations[0].dateIn.toString()} au ${Provider.of<ReservationProvider>(context, listen: false).validReservation.reservations[0].dateOut.toString()} ",
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 18),
                             ),
                           ],
                         ),
@@ -63,29 +79,28 @@ class _BookingDetailsState extends State<BookingDetails> {
                   const SizedBox(
                     height: 25,
                   ),
-                  const Card(
-                    color: Color(0xFF455A64),
+                  Card(
+                    color: const Color(0xFF455A64),
                     child: SizedBox(
                       width: 330,
                       height: 120,
                       child: Padding(
-                        padding: EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.all(15.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Text(
-                              "Mougnagna Betsy",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                              Provider.of<ReservationProvider>(context,
+                                      listen: false)
+                                  .validReservation
+                                  .reservations[0]
+                                  .userName,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 18),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
-                            ),
-                            Text(
-                              "Nombre de personne: 2 adultes",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
                             ),
                           ],
                         ),

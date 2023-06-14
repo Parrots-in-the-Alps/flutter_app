@@ -34,159 +34,77 @@ class ReservationCarrier {
 
 class Reservation {
   int id;
-  DateTime entryDate;
-  DateTime exitDate;
-  int userId;
-  bool isDue;
-  DateTime createdAt;
-  DateTime updatedAt;
-  int roomId;
-  dynamic serviceId;
+  DateTime dateIn;
+  DateTime dateOut;
+  String userName;
+  dynamic nfcTag;
   dynamic checkedIn;
   Room room;
-  int cardCounter;
-  String user;
-  dynamic nfcTag;
 
   Reservation({
     required this.id,
-    required this.entryDate,
-    required this.exitDate,
-    required this.userId,
-    required this.isDue,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.roomId,
-    this.serviceId,
+    required this.dateIn,
+    required this.dateOut,
+    required this.userName,
+    this.nfcTag,
     this.checkedIn,
     required this.room,
-    required this.cardCounter,
-    required this.user,
-    this.nfcTag,
   });
 
   factory Reservation.fromJson(Map<String, dynamic> json) => Reservation(
         id: json["id"],
-        entryDate: DateTime.parse(json["entryDate"]),
-        exitDate: DateTime.parse(json["exitDate"]),
-        userId: json["user_id"],
-        isDue: json["isDue"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        roomId: json["room_id"],
-        serviceId: json["service_id"],
-        checkedIn: json["checked_in"],
-        room: Room.fromJson(json["room"]),
-        cardCounter: json["cardCounter"],
-        user: json["user"],
+        dateIn: DateTime.parse(json["dateIn"]),
+        dateOut: DateTime.parse(json["dateOut"]),
+        userName: json["userName"],
         nfcTag: json["nfcTag"],
+        checkedIn: json["checkedIn"],
+        room: Room.fromJson(json["room"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "entryDate":
-            "${entryDate.year.toString().padLeft(4, '0')}-${entryDate.month.toString().padLeft(2, '0')}-${entryDate.day.toString().padLeft(2, '0')}",
-        "exitDate":
-            "${exitDate.year.toString().padLeft(4, '0')}-${exitDate.month.toString().padLeft(2, '0')}-${exitDate.day.toString().padLeft(2, '0')}",
-        "user_id": userId,
-        "isDue": isDue,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-        "room_id": roomId,
-        "service_id": serviceId,
-        "checked_in": checkedIn,
-        "room": room.toJson(),
-        "cardCounter": cardCounter,
-        "user": user,
+        "dateIn":
+            "${dateIn.year.toString().padLeft(4, '0')}-${dateIn.month.toString().padLeft(2, '0')}-${dateIn.day.toString().padLeft(2, '0')}",
+        "dateOut":
+            "${dateOut.year.toString().padLeft(4, '0')}-${dateOut.month.toString().padLeft(2, '0')}-${dateOut.day.toString().padLeft(2, '0')}",
+        "userName": userName,
         "nfcTag": nfcTag,
+        "checkedIn": checkedIn,
+        "room": room.toJson(),
       };
 }
 
 class Room {
-  int id;
-  Description name;
+  Type type;
   int number;
-  bool isActive;
-  bool isQueued;
-  Description type;
-  int capacity;
-  String price;
-  Image image;
-  Description description;
-  DateTime createdAt;
-  DateTime updatedAt;
+  dynamic activeCards;
 
   Room({
-    required this.id,
-    required this.name,
-    required this.number,
-    required this.isActive,
-    required this.isQueued,
     required this.type,
-    required this.capacity,
-    required this.price,
-    required this.image,
-    required this.description,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.number,
+    this.activeCards,
   });
 
   factory Room.fromJson(Map<String, dynamic> json) => Room(
-        id: json["id"],
-        name: Description.fromJson(json["name"]),
+        type: typeValues.map[json["type"]]!,
         number: json["number"],
-        isActive: json["isActive"],
-        isQueued: json["isQueued"],
-        type: Description.fromJson(json["type"]),
-        capacity: json["capacity"],
-        price: json["price"],
-        image: imageValues.map[json["image"]]!,
-        description: Description.fromJson(json["description"]),
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        activeCards: json["ActiveCards"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name.toJson(),
+        "type": typeValues.reverse[type],
         "number": number,
-        "isActive": isActive,
-        "isQueued": isQueued,
-        "type": type.toJson(),
-        "capacity": capacity,
-        "price": price,
-        "image": imageValues.reverse[image],
-        "description": description.toJson(),
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
+        "ActiveCards": activeCards,
       };
 }
 
-class Description {
-  String en;
-  String fr;
+enum Type { LUXURY, STANDARD, LUXE, SUITE }
 
-  Description({
-    required this.en,
-    required this.fr,
-  });
-
-  factory Description.fromJson(Map<String, dynamic> json) => Description(
-        en: json["en"],
-        fr: json["fr"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "en": en,
-        "fr": fr,
-      };
-}
-
-enum Image { LUXURY_ROOM_JPG, STANDARD_ROOM_JPG }
-
-final imageValues = EnumValues({
-  "luxury_room.jpg": Image.LUXURY_ROOM_JPG,
-  "standard_room.jpg": Image.STANDARD_ROOM_JPG
+final typeValues = EnumValues({
+  "luxury": Type.LUXURY,
+  "standard": Type.STANDARD,
+  "luxe": Type.LUXE,
+  "suite": Type.SUITE
 });
 
 class EnumValues<T> {

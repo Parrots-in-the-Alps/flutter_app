@@ -30,8 +30,8 @@ class _QRCodeState extends State<QRCode> {
         Provider.of<ReservationProvider>(context, listen: false).reservationId =
             scanData.code!;
 
-        Provider.of<ReservationProvider>(context, listen: false)
-            .isReservationValide(int.parse(scanData.code!));
+        // Provider.of<ReservationProvider>(context, listen: false)
+        //     .isReservationValide(int.parse(scanData.code!));
 
         Navigator.push(
           context,

@@ -7,11 +7,12 @@ import '../models/tag_carrier.dart';
 
 class ReservationApi {
   /// check de la réservation
-  Future<ReservationCarrier> isReservationValide(int reservationId) async {
+  Future<ReservationCarrier> isReservationValide(String reservationId) async {
     var response = await http.post(
         Uri.parse("https://vulcan-7bh9.onrender.com/api/isresavalide"),
         body: {"reservation_id": reservationId});
     if (response.statusCode == 203) {
+      print(response.body);
       return reservationCarrierFromJson(response.body);
     }
     throw Exception('Reservation non valide');
