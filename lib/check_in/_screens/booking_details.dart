@@ -87,37 +87,11 @@ class _BookingDetailsState extends State<BookingDetails> {
                     ),
                     RawMaterialButton(
                       onPressed: () {
-                        Future<String> nfcTag0 = ReservationApi()
-                            .validateReservation(
-                                Provider.of<ReservationProvider>(context,
-                                        listen: false)
-                                    .reservationId);
-                        FutureBuilder<String>(
-                            future: nfcTag0,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                final String nfcTag = snapshot.data!;
-                                bool setOk = Provider.of<ReservationProvider>(
-                                        context,
-                                        listen: false)
-                                    .setReservationNfcTag(
-                                        Provider.of<ReservationProvider>(
-                                                context,
-                                                listen: false)
-                                            .reservationId,
-                                        nfcTag);
-
-                                if (setOk) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const BookingValidated()),
-                                  );
-                                }
-                              }
-                              return VulcanAlertDialog(textAlert: "erreur");
-                            });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const BookingValidated()),
+                        );
                       },
                       elevation: 2.0,
                       fillColor: const Color(0xFF07B456),

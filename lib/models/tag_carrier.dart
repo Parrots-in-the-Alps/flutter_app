@@ -15,12 +15,12 @@ class TagCarrier {
   });
 
   factory TagCarrier.fromJson(Map<String, dynamic> json) => TagCarrier(
-        status: json["staus"],
+        status: json["status"],
         nfcTag: json["nfc_tag"],
       );
 
   Map<String, dynamic> toJson() => {
-        "staus": status,
+        "status": status,
         "nfc_tag": nfcTag,
       };
 }

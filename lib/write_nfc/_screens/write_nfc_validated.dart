@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
+import 'package:vulcan_mobile_app/providers/simulation_provider.dart';
+import 'package:vulcan_mobile_app/repositories/simulation_api.dart';
 import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
 
-class WriteNFCValidated extends StatelessWidget {
+class WriteNFCValidated extends StatefulWidget {
   const WriteNFCValidated({super.key});
+
+  @override
+  State<WriteNFCValidated> createState() => _WriteNFCValidatedState();
+}
+
+class _WriteNFCValidatedState extends State<WriteNFCValidated> {
+  @override
+  void initState() {
+    super.initState();
+    String nfcTag = Provider.of<ReservationProvider>(context, listen: false)
+        .reservations
+        .reservations[0]
+        .nfcTag;
+    int resaId = int.parse(
+        Provider.of<ReservationProvider>(context, listen: false).reservationId);
+  }
 
   @override
   Widget build(BuildContext context) {

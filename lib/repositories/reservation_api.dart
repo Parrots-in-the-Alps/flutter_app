@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:js';
 
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -26,8 +25,15 @@ class ReservationApi {
     var response = await http.post(
         Uri.parse("https://vulcan-7bh9.onrender.com/api/validateresa"),
         body: {"reservation_id": reservationId});
+    print('zizi');
     if (response.statusCode == 203) {
-      return TagCarrier.fromJson(jsonDecode(response.body)).nfcTag;
+      print('zozo');
+      print('zuzu');
+      print(response.body);
+      TagCarrier tag = tagCarrierFromJson(response.body);
+      print(tag.nfcTag);
+      print('zuzu2');
+      return tag.nfcTag;
     } else {
       return "open nee nooor";
     }
@@ -41,5 +47,15 @@ class ReservationApi {
       return reservationCarrierFromJson(response.body);
     }
     throw Exception(response.statusCode);
+  }
+
+  Future<String> setNfcTag(String nfcTag, int roomId) async {
+    var response = await http.post(
+        Uri.parse("https://vulcan-7bh9.onrender.com/api/isresavalide"),
+        body: {"room_id": roomId, "nfc_tag": nfcTag});
+    if (response.statusCode == 203) {
+      return "zizicoptere" * 2;
+    }
+    throw Exception('no zizicoptere' * 2);
   }
 }

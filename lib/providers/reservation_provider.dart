@@ -9,9 +9,12 @@ class ReservationProvider extends ChangeNotifier {
   late ReservationCarrier reservations;
   // late bool _nfcSet;
 
-  bool setReservationNfcTag(String id, String nfcTag) {
+  bool setReservationNfcTag(String nfcTag) {
+    print('tutu');
     for (Reservation reservation in reservations.reservations) {
-      if (reservation.id == id) {
+      print('toto');
+      if (reservation.id == int.parse(reservationId)) {
+        print("je suis dans le if");
         reservation.nfcTag = nfcTag;
         return true;
       }
