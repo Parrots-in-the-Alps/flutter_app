@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:vulcan_mobile_app/models/room_carrier.dart';
 
 class SimultationApi {
 
@@ -19,5 +20,15 @@ class SimultationApi {
         print("code http inccorect");
         return false;
     }
+  }
+
+  Future<RoomCarrier> fetchRooms() async {
+      final response = await http.get(Uri.parse(
+          'https://vulcan-7bh9.onrender.com/api/rooms'));
+      print(response);
+      if (response.statusCode != 200) {
+        throw Exception('Erreur lors de la récupération des chambres'); 
+      } 
+      return roomCarrierFromJson(response.body);
   }
 }
