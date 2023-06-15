@@ -20,8 +20,9 @@ class _BookingDetailsState extends State<BookingDetails> {
   @override
   initState() {
     super.initState();
-    validReservation = ReservationApi().isReservationValide(
-        Provider.of<ReservationProvider>(context, listen: false).reservationId);
+    String resaId =
+        Provider.of<ReservationProvider>(context, listen: false).reservationId;
+    validReservation = ReservationApi().isReservationValide(resaId);
   }
 
   @override
@@ -33,6 +34,9 @@ class _BookingDetailsState extends State<BookingDetails> {
           future: validReservation,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+              final ReservationCarrier resa = snapshot.data!;
+              Provider.of<ReservationProvider>(context, listen: false)
+                  .reservations = resa;
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 40.0),
                 child: Column(
@@ -83,16 +87,37 @@ class _BookingDetailsState extends State<BookingDetails> {
                     ),
                     RawMaterialButton(
                       onPressed: () {
-                        ReservationApi().validateReservation(
-                            Provider.of<ReservationProvider>(context,
-                                    listen: false)
-                                .reservationId);
+                        Future<String> nfcTag0 = ReservationApi()
+                            .validateReservation(
+                                Provider.of<ReservationProvider>(context,
+                                        listen: false)
+                                    .reservationId);
+                        FutureBuilder<String>(
+                            future: nfcTag0,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                final String nfcTag = snapshot.data!;
+                                bool setOk = Provider.of<ReservationProvider>(
+                                        context,
+                                        listen: false)
+                                    .setReservationNfcTag(
+                                        Provider.of<ReservationProvider>(
+                                                context,
+                                                listen: false)
+                                            .reservationId,
+                                        nfcTag);
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const BookingValidated()),
-                        );
+                                if (setOk) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const BookingValidated()),
+                                  );
+                                }
+                              }
+                              return VulcanAlertDialog(textAlert: "erreur");
+                            });
                       },
                       elevation: 2.0,
                       fillColor: const Color(0xFF07B456),

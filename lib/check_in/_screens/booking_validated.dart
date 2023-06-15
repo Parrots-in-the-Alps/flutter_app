@@ -29,7 +29,7 @@ class BookingValidated extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              const MenuButton(text: "Écrire une clé", destination: WriteNfc()),
+              const MenuButton(text: "Écrire une clé", destination: HomePage()),
               const MenuButton(text: "Accueuil", destination: HomePage()),
             ],
           ),
