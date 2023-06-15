@@ -44,10 +44,12 @@ class _RoomListState extends State<RoomList> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final roomCarrier = snapshot.data!;
-            Provider.of<RoomProvider>(context, listen: false)
-                .roomCarrier = roomCarrier;
+            Provider.of<RoomProvider>(context, listen: false).roomCarrier =
+                roomCarrier;
             print(Provider.of<RoomProvider>(context, listen: false)
-                .roomCarrier.data[0].capacity);
+                .roomCarrier
+                .data[0]
+                .capacity);
             return Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -93,7 +95,7 @@ class _RoomListState extends State<RoomList> {
             ),
             const SizedBox(height: 8),
             Text(
-              '${room.number}',
+              room.type.name,
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.white,
@@ -101,11 +103,15 @@ class _RoomListState extends State<RoomList> {
             ),
             const SizedBox(height: 16),
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: const Color(0xFF455A64),
-                    side: const BorderSide(color: Colors.orange),
+                RawMaterialButton(
+                  fillColor: Colors.orange,
+                  elevation: 2.0,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -114,24 +120,24 @@ class _RoomListState extends State<RoomList> {
                         builder: (context) => widget.widgetRedirection,
                       ),
                     );
+                    
                   },
-                  child: Text(
-                    widget.buttonTitle,
-                    style: const TextStyle(
-                      color: Colors.orange,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  'N° ${room.number}',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        widget.buttonTitle,
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      const Icon(Icons.contactless),
+                    ],
                   ),
                 ),
               ],
             ),
+            const SizedBox(width: 8),
           ],
         ),
       ),

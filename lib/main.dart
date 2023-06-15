@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:vulcan_mobile_app/main/home_page.dart';
 import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
 import 'package:vulcan_mobile_app/providers/room_provider.dart';
+import 'package:vulcan_mobile_app/providers/room_provider.dart';
 import 'package:vulcan_mobile_app/providers/simulation_provider.dart';
 
 void main() {
@@ -11,7 +12,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (context) => ReservationProvider()),
         ChangeNotifierProvider(create: (context) => SimulationProvider()),
-        ChangeNotifierProvider(create: (context) => RoomProvider()),
+        ChangeNotifierProvider(create: (context) => RoomProvider())
       ],
       child: const MyApp(),
     ),

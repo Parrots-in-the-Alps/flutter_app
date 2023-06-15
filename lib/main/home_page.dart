@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vulcan_mobile_app/check_in/_screens/qr_code.dart';
+import 'package:vulcan_mobile_app/simulation/_screens/access_simulation.dart';
 import 'package:vulcan_mobile_app/simulation/_screens/listing_room.dart';
 import 'package:vulcan_mobile_app/simulation/_screens/simulation_room_list_card.dart';
 import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
                 MenuButton(
                     text: 'Ecrire une clé', destination: ListingReservation()),
                 MenuButton(
-                    text: 'Simulation', destination: RoomList(buttonTitle: 'toto', widgetRedirection: QRCode())),
+                    text: 'Simulation', destination: RoomList(buttonTitle: 'Simuler l\'accès', widgetRedirection: AccessSimulation())),
               ],
             ),
           ),
