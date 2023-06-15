@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vulcan_mobile_app/models/room_carrier.dart';
-import 'package:vulcan_mobile_app/providers/room_provider.dart';
-import 'package:vulcan_mobile_app/repositories/simulation_api.dart';
+import 'package:vulcan_mobile_app/models/reservation_carrier.dart';
+import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
+import 'package:vulcan_mobile_app/repositories/reservation_api.dart';
 
 class RoomList extends StatefulWidget {
   const RoomList({
@@ -19,13 +19,13 @@ class RoomList extends StatefulWidget {
 }
 
 class _RoomListState extends State<RoomList> {
-  late Future<RoomCarrier> roomCa;
+  late Future<ReservationCarrier> reservationCarrier;
 
   @override
   void initState() {
     super.initState();
     // SimultationApi simApi = new SimultationApi();
-    roomCa = SimultationApi().fetchRooms();
+    reservationCarrier = ReservationApi().getRollingReservation();
   }
 
   // @override
@@ -38,28 +38,25 @@ class _RoomListState extends State<RoomList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      //TODO
       height: 600,
       child: FutureBuilder(
-        future: roomCa,
+        future: reservationCarrier,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final roomCarrier = snapshot.data!;
-            Provider.of<RoomProvider>(context, listen: false).roomCarrier =
-                roomCarrier;
-            print(Provider.of<RoomProvider>(context, listen: false)
-                .roomCarrier
-                .data[0]
-                .capacity);
+            final resaCarrier = snapshot.data!;
+            Provider.of<ReservationProvider>(context, listen: false)
+                .reservations = resaCarrier;
             return Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
-                    itemCount: roomCarrier.data.length,
+                    itemCount: resaCarrier.reservations.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final room = roomCarrier.data[index];
-                      return buildCard(room);
+                      final resa = resaCarrier.reservations[index];
+                      return buildCard(resa);
                     },
                   ),
                 ),
@@ -77,7 +74,7 @@ class _RoomListState extends State<RoomList> {
     );
   }
 
-  Widget buildCard(Room room) {
+  Widget buildCard(Reservation resa) {
     return Card(
       color: const Color(0xFF455A64),
       child: Padding(
@@ -85,17 +82,30 @@ class _RoomListState extends State<RoomList> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'N° ${room.number}',
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Reservation N°${resa.id.toString()}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  'Chambre N° ${resa.room.number}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 8),
             Text(
-              room.type.name,
+              resa.room.type.name,
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.white,
@@ -103,8 +113,17 @@ class _RoomListState extends State<RoomList> {
             ),
             const SizedBox(height: 16),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Text(
+                  resa.userName,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const Spacer(),
                 RawMaterialButton(
                   fillColor: Colors.orange,
                   elevation: 2.0,
@@ -120,7 +139,8 @@ class _RoomListState extends State<RoomList> {
                         builder: (context) => widget.widgetRedirection,
                       ),
                     );
-                    
+                    Provider.of<ReservationProvider>(context, listen: false)
+                        .reservationId = resa.id.toString();
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -135,6 +155,7 @@ class _RoomListState extends State<RoomList> {
                     ],
                   ),
                 ),
+                const SizedBox(width: 8),
               ],
             ),
             const SizedBox(width: 8),
