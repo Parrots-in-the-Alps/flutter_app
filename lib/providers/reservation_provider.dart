@@ -15,6 +15,7 @@ class ReservationProvider extends ChangeNotifier {
       print('toto');
       if (reservation.id == int.parse(reservationId)) {
         print("je suis dans le if");
+        print(reservations.reservations.length);
         reservation.nfcTag = nfcTag;
         return true;
       }

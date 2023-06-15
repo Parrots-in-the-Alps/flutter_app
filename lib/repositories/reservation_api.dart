@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -49,13 +50,15 @@ class ReservationApi {
     throw Exception(response.statusCode);
   }
 
-  Future<String> setNfcTag(String nfcTag, int roomId) async {
+  Future<bool> setNfcTag(String nfcTag, int roomId) async {
+    print('avant appel');
     var response = await http.post(
-        Uri.parse("https://vulcan-7bh9.onrender.com/api/isresavalide"),
-        body: {"room_id": roomId, "nfc_tag": nfcTag});
+        Uri.parse("https://vulcan-7bh9.onrender.com/api/setNfc"),
+        body: {"room_id": roomId.toString(), "nfc_tag": nfcTag});
+    print('après appel');
     if (response.statusCode == 203) {
-      return "zizicoptere" * 2;
+      return true;
     }
-    throw Exception('no zizicoptere' * 2);
+    return false;
   }
 }
