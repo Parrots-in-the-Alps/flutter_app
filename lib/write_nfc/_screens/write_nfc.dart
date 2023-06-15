@@ -34,26 +34,26 @@ class _WriteNfcState extends State<WriteNfc> {
             .size
             .width, // Définir la largeur à la largeur de l'écran
         color: const Color(0xFF607D8B),
-        child: const Padding(
-          padding: EdgeInsets.all(24.0),
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                'Chambre pour x personnes \n reservation n 124 \n chambre 404',
+                "reservation n${Provider.of<ReservationProvider>(context, listen: false).reservations.reservations[0].id} \n chambre n${Provider.of<ReservationProvider>(context, listen: false).reservations.reservations[0].room.number}",
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
-              Icon(
+              const Icon(
                 Icons.nfc,
                 color: Color(0xFF455A64),
                 size: 128,
               ),
-              Text(
+              const Text(
                 'Mettre la carte sur le téléphone',
                 textAlign: TextAlign.center,
                 style: TextStyle(

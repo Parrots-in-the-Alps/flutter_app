@@ -2,9 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import 'package:provider/provider.dart';
+import 'package:vulcan_mobile_app/providers/simulation_provider.dart';
 import 'package:vulcan_mobile_app/simulation/_screens/simulation_failed.dart';
 import 'package:vulcan_mobile_app/simulation/_screens/simulation_validated.dart';
 import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
+
+import '../../providers/reservation_provider.dart';
+import '../../repositories/simulation_api.dart';
 
 class AccessSimulation extends StatefulWidget {
   const AccessSimulation({super.key});
@@ -97,7 +102,8 @@ class _AccessSimulationState extends State<AccessSimulation> {
       }, onDiscovered: (NfcTag tag) async {
         setState(() {
           _scannedTag = Future.value(tag);
-          //setNfc ?? /TODO
+          Provider.of<SimulationProvider>(context, listen: false).nfcTag =
+              _scannedTag.toString();
           Navigator.push(
             context,
             MaterialPageRoute(

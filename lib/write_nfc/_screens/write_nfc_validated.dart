@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vulcan_mobile_app/main/home_page.dart';
 import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
 import 'package:vulcan_mobile_app/providers/simulation_provider.dart';
 import 'package:vulcan_mobile_app/repositories/reservation_api.dart';
@@ -49,14 +50,6 @@ class _WriteNFCValidatedState extends State<WriteNFCValidated> {
               children: [
                 Column(
                   children: [
-                    const Text(
-                      "Chambre pour X personnes",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
                     reservationID == ""
                         ? const Text(
                             "reservation n X",
@@ -67,10 +60,16 @@ class _WriteNFCValidatedState extends State<WriteNFCValidated> {
                             ),
                           )
                         : Text(
-                            "reservation n${Provider.of<ReservationProvider>(context, listen: false).reservationId}"),
-                    const Text(
-                      "Chambre 404",
-                      style: TextStyle(
+                            "reservation n${Provider.of<ReservationProvider>(context, listen: false).reservationId}",
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                    Text(
+                      "chambre n${Provider.of<ReservationProvider>(context, listen: false).reservations.reservations[0].room.number}",
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -79,7 +78,12 @@ class _WriteNFCValidatedState extends State<WriteNFCValidated> {
                   ],
                 ),
                 RawMaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomePage()),
+                    );
+                  },
                   elevation: 2.0,
                   fillColor: const Color(0xFF07B456),
                   padding: const EdgeInsets.all(30.0),
