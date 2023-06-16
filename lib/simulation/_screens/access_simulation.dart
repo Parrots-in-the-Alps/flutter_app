@@ -8,9 +8,6 @@ import 'package:vulcan_mobile_app/simulation/_screens/simulation_failed.dart';
 import 'package:vulcan_mobile_app/simulation/_screens/simulation_validated.dart';
 import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
 
-import '../../providers/reservation_provider.dart';
-import '../../repositories/simulation_api.dart';
-
 class AccessSimulation extends StatefulWidget {
   const AccessSimulation({super.key});
 

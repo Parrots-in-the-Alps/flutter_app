@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": true
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "name": "render_vulcan",
+            "connectString": "postgres://db_vulcan_user:HJrd2HbQ9n7Una3lKv7noGcEi7Il4okG@dpg-chve081mbg5b5pei6fng-a.frankfurt-postgres.render.com/db_vulcan"
+        }
+    ]
+}

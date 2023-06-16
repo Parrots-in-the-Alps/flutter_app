@@ -111,7 +111,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                   textAlert: 'reservation non valide');
             }
 
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           },
         ));
   }

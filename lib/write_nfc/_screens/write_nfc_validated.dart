@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vulcan_mobile_app/main/home_page.dart';
 import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
-import 'package:vulcan_mobile_app/providers/simulation_provider.dart';
 import 'package:vulcan_mobile_app/repositories/reservation_api.dart';
-import 'package:vulcan_mobile_app/repositories/simulation_api.dart';
 import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
 
 class WriteNFCValidated extends StatefulWidget {

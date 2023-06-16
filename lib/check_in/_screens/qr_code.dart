@@ -29,10 +29,6 @@ class _QRCodeState extends State<QRCode> {
         controller.pauseCamera();
         Provider.of<ReservationProvider>(context, listen: false).reservationId =
             scanData.code!;
-
-        // Provider.of<ReservationProvider>(context, listen: false)
-        //     .isReservationValide(int.parse(scanData.code!));
-
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -57,44 +53,3 @@ class _QRCodeState extends State<QRCode> {
                 ))));
   }
 }
-
-/**
- * 
- ,
-            Expanded(
-                flex: 1,
-                child: Center(
-                  child: Text(
-                    "Scan result: $result",
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                )),
-            Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        if (result.isNotEmpty) {
-                          Clipboard.setData(ClipboardData(text: result));
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content: Text("Copied to Clipboard"),
-                          ));
-                        }
-                      },
-                      child: const Text("Copy")),
-                  ElevatedButton(
-                      onPressed: () async {
-                        if (result.isNotEmpty) {
-                          final Uri url = Uri.parse(result);
-                          await launchUrl(url);
-                        }
-                      },
-                      child: const Text("Open"))
-                ],
-              ),
-            )
- * 
- */

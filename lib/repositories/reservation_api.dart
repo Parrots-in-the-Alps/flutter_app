@@ -1,11 +1,5 @@
-import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 import 'package:vulcan_mobile_app/models/reservation_carrier.dart';
-import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
-
 import '../models/tag_carrier.dart';
 
 class ReservationApi {

@@ -22,13 +22,13 @@ class _SimulationValidatedState extends State<SimulationValidated> {
   @override
   void initState() {
     super.initState();
-    int reservationId = Provider.of<ReservationProvider>(context, listen: false)
-        .reservations
-        .reservations[0]
-        .id;
+    String reservationId =
+        Provider.of<ReservationProvider>(context, listen: false).reservationId;
     String scannedTag =
         Provider.of<SimulationProvider>(context, listen: false).nfcTag;
     isOpen = SimultationApi().openNaaNoor(scannedTag, reservationId);
+    print("isOpen:\n");
+    print(isOpen);
   }
 
   @override
@@ -40,6 +40,7 @@ class _SimulationValidatedState extends State<SimulationValidated> {
             child: FutureBuilder<bool>(
                 future: isOpen,
                 builder: (context, snapshot) {
+                  print(snapshot);
                   print("zungugugu");
                   if (snapshot.hasData) {
                     print("prout stp");
@@ -78,6 +79,8 @@ class _SimulationValidatedState extends State<SimulationValidated> {
                       return const SimulationFailed();
                     }
                   } else if (snapshot.hasError) {
+                    print("snapshot data:\n");
+                    print(snapshot);
                     return const VulcanAlertDialog(textAlert: "erreur");
                   }
                   return const Center(child: CircularProgressIndicator());
