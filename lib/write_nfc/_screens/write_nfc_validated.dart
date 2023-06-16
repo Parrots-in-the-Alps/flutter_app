@@ -17,14 +17,9 @@ class _WriteNFCValidatedState extends State<WriteNFCValidated> {
   void initState() {
     super.initState();
     String nfcTag = Provider.of<ReservationProvider>(context, listen: false)
-        .reservations
-        .reservations[0]
-        .nfcTag;
-    int roomId = Provider.of<ReservationProvider>(context, listen: false)
-        .reservations
-        .reservations[0]
-        .room
-        .roomId;
+        .getRoomNfcTag();
+    int roomId =
+        Provider.of<ReservationProvider>(context, listen: false).getRoomId();
     ReservationApi().setNfcTag(nfcTag, roomId);
   }
 

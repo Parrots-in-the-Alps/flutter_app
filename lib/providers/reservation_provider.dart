@@ -26,9 +26,24 @@ class ReservationProvider extends ChangeNotifier {
     throw Exception("reservation non trouvée");
   }
 
-  
+  String getRoomNfcTag() {
+    for (Reservation reservation in reservations.reservations) {
+      if (reservation.id == int.parse(reservationId)) {
+        return reservation.nfcTag;
+      }
+    }
+    throw Exception("reservation non trouvée");
+  }
 
-
-
-
+  Reservation getResaById() {
+    print("getresabyid${reservationId}");
+    for (Reservation reservation in reservations.reservations) {
+      if (reservation.id == int.parse(reservationId)) {
+        print(reservation);
+        print(reservation.nfcTag);
+        return reservation;
+      }
+    }
+    throw Exception("reservation non trouvée");
+  }
 }

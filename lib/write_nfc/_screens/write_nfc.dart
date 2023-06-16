@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:provider/provider.dart';
+import 'package:vulcan_mobile_app/models/reservation_carrier.dart';
 import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
 import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
 import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc_validated.dart';
@@ -14,14 +15,14 @@ class WriteNfc extends StatefulWidget {
 
 class _WriteNfcState extends State<WriteNfc> {
   String _dataToWrite = "Hello NFC 🏆"; //remplacer par le tag_nfc récupérer
+  late Reservation resa;
 
   @override
   initState() {
     super.initState();
-    _dataToWrite = Provider.of<ReservationProvider>(context, listen: false)
-        .reservations
-        .reservations[0]
-        .nfcTag;
+    resa =
+        Provider.of<ReservationProvider>(context, listen: false).getResaById();
+    _dataToWrite = resa.nfcTag;
     writeData(_dataToWrite);
   }
 
@@ -40,7 +41,7 @@ class _WriteNfcState extends State<WriteNfc> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                "reservation n${Provider.of<ReservationProvider>(context, listen: false).reservations.reservations[0].id} \n chambre n${Provider.of<ReservationProvider>(context, listen: false).reservations.reservations[0].room.number}",
+                "reservation n${resa.id} \n chambre n${resa.room.number}",
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 24,
