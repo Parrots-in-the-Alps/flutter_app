@@ -19,10 +19,7 @@ class ListingRoom extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                MyCardWidget2(
-                  buttonTitle: "coucou",
-                  widgetRedirection: HomePage(),
-                ),
+                MyCardWidget(),
               ],
             ),
           ),

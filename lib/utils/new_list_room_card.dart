@@ -1,42 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:vulcan_mobile_app/main/home_page.dart';
 import 'package:vulcan_mobile_app/models/reservation_carrier.dart';
+import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
+import 'package:vulcan_mobile_app/repositories/reservation_api.dart';
+import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc.dart';
 
-class MyCardWidget2 extends StatefulWidget {
-  const MyCardWidget2({
+import '../check_in/_screens/booking_details.dart';
+import '../check_in/_screens/qr_code.dart';
+import 'list_boutton.dart';
+
+class MyCardWidget extends StatefulWidget {
+  const MyCardWidget({
     Key? key,
-    required this.buttonTitle,
-    required this.widgetRedirection,
   }) : super(key: key);
-
-  final String buttonTitle;
-  final Widget widgetRedirection;
 
   @override
   _MyCardWidgetState createState() => _MyCardWidgetState();
 }
 
-class _MyCardWidgetState extends State<MyCardWidget2> {
-  late ReservationCarrier reservationCarrier;
+class _MyCardWidgetState extends State<MyCardWidget> {
+  late Future<ReservationCarrier> reservationCarrier;
 
   @override
   void initState() {
     super.initState();
-    fetchData();
-  }
-
-  Future<void> fetchData() async {
-    try {
-      final response = await http.get(Uri.parse(
-          'https://vulcan-7bh9.onrender.com/api/getRollingReservations'));
-      if (response.statusCode == 203) {
-        reservationCarrier = reservationCarrierFromJson(response.body);
-      } else {
-        print('Erreur de requête API : ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Erreur lors de la récupération des données : $e');
-    }
+    // SimultationApi simApi = new SimultationApi();
+    reservationCarrier = ReservationApi().getRollingReservation();
   }
 
   // @override
@@ -49,17 +39,43 @@ class _MyCardWidgetState extends State<MyCardWidget2> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      //TODO
       height: 600,
-      child: ListView.builder(
-        itemCount: reservationCarrier.reservations.length,
-        itemBuilder: (context, index) {
-          return buildCard(reservationCarrier.reservations[index]);
+      child: FutureBuilder(
+        future: reservationCarrier,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final resaCarrier = snapshot.data!;
+            Provider.of<ReservationProvider>(context, listen: false)
+                .reservations = resaCarrier;
+            return Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: resaCarrier.reservations.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final resa = resaCarrier.reservations[index];
+                      return buildCard(resa);
+                    },
+                  ),
+                ),
+              ],
+            );
+          } else if (snapshot.hasError) {
+            throw const AlertDialog(
+              backgroundColor: Color.fromRGBO(98, 0, 238, 1.0),
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
         },
       ),
     );
   }
 
-  Widget buildCard(Reservation reservation) {
+  Widget buildCard(Reservation resa) {
     return Card(
       color: const Color(0xFF455A64),
       child: Padding(
@@ -67,17 +83,30 @@ class _MyCardWidgetState extends State<MyCardWidget2> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'N° ${reservation.room.number}',
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Reservation N°${resa.id.toString()}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  'Chambre N° ${resa.room.number}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 8),
             Text(
-              'N° ${reservation.room.number}',
+              resa.room.type.name,
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.white,
@@ -85,37 +114,27 @@ class _MyCardWidgetState extends State<MyCardWidget2> {
             ),
             const SizedBox(height: 16),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: const Color(0xFF455A64),
-                    side: const BorderSide(color: Colors.orange),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => widget.widgetRedirection,
-                      ),
-                    );
-                  },
-                  child: Text(
-                    widget.buttonTitle,
-                    style: const TextStyle(
-                      color: Colors.orange,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
                 Text(
-                  'N° ${reservation.room.number}',
+                  resa.userName,
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
+                const Spacer(),
+                ListButton(
+                    destination: resa.checkedIn == null
+                        ? const BookingDetails()
+                        : const WriteNfc(),
+                    text: resa.checkedIn == null ? "checked-in" : "Ecrire clé",
+                    resa: resa),
+                const SizedBox(width: 8),
               ],
             ),
+            const SizedBox(width: 8),
           ],
         ),
       ),
