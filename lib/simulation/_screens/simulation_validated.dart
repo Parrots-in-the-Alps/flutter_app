@@ -27,8 +27,6 @@ class _SimulationValidatedState extends State<SimulationValidated> {
     String scannedTag =
         Provider.of<SimulationProvider>(context, listen: false).nfcTag;
     isOpen = SimultationApi().openNaaNoor(scannedTag, reservationId);
-    print("isOpen:\n");
-    print(isOpen);
   }
 
   @override
@@ -40,9 +38,7 @@ class _SimulationValidatedState extends State<SimulationValidated> {
             child: FutureBuilder<bool>(
                 future: isOpen,
                 builder: (context, snapshot) {
-                  print("snapshot: $snapshot");
                   if (snapshot.hasData) {
-                    print("hasData");
                     if (snapshot.data! == true) {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -78,8 +74,6 @@ class _SimulationValidatedState extends State<SimulationValidated> {
                       return const SimulationFailed();
                     }
                   } else if (snapshot.hasError) {
-                    print("hasError");
-                    print("snapshot $snapshot");
                     return const VulcanAlertDialog(textAlert: "erreur");
                   }
                   return const Center(child: CircularProgressIndicator());

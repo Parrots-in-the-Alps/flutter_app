@@ -29,7 +29,6 @@ class _MyCardWidgetState extends State<MyCardWidget2> {
     try {
       final response = await http.get(Uri.parse(
           'https://vulcan-7bh9.onrender.com/api/getRollingReservations'));
-      print(response);
       if (response.statusCode == 203) {
         reservationCarrier = reservationCarrierFromJson(response.body);
       } else {
