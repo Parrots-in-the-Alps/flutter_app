@@ -29,9 +29,10 @@ class ReservationApi {
   }
 
   // Retourne la liste des reservations en cours
-  Future<ReservationCarrier> getRollingReservation() async {
-    var response = await http.get(Uri.parse(
-        'https://vulcan-7bh9.onrender.com/api/getRollingReservations'));
+  Future<ReservationCarrier> getRollingReservation(bool checkedIn) async {
+    var response = await http.post(Uri.parse(
+        'https://vulcan-7bh9.onrender.com/api/getRollingReservations'),
+        body: {"checkedIn_resa": checkedIn});
     if (response.statusCode == 203) {
       return reservationCarrierFromJson(response.body);
     }
