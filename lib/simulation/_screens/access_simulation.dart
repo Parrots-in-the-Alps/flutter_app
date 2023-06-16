@@ -18,8 +18,6 @@ class AccessSimulation extends StatefulWidget {
 }
 
 class _AccessSimulationState extends State<AccessSimulation> {
-  late Future<NfcTag?> _scannedTag = Future.value(null); //nfc_tag
-
   @override
   initState() {
     super.initState();
@@ -93,7 +91,6 @@ class _AccessSimulationState extends State<AccessSimulation> {
     if (isAvailable) {
       await NfcManager.instance.startSession(onError: (error) async {
         print(error);
-        _scannedTag = Future.error(error);
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const SimulationFailed()),
