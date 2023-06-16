@@ -47,4 +47,14 @@ class ReservationApi {
     }
     return false;
   }
+
+  Future<bool> checkCardCounter(int roomId) async {
+    var response = await http.post(
+        Uri.parse("https://vulcan-7bh9.onrender.com/api/checkcard"),
+        body: {"room_id": roomId.toString()});
+    if (response.statusCode == 203) {
+      return true;
+    }
+    return false;
+  }
 }

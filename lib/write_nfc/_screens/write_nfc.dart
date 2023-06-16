@@ -6,6 +6,9 @@ import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
 import 'package:vulcan_mobile_app/providers/reservation_provider.dart';
 import 'package:vulcan_mobile_app/write_nfc/_screens/write_nfc_validated.dart';
 
+import '../../repositories/reservation_api.dart';
+import '../../utils/vulcan_alert_dialog.dart';
+
 class WriteNfc extends StatefulWidget {
   const WriteNfc({super.key});
 
@@ -16,58 +19,78 @@ class WriteNfc extends StatefulWidget {
 class _WriteNfcState extends State<WriteNfc> {
   String _dataToWrite = "Hello NFC 🏆"; //remplacer par le tag_nfc récupérer
   late Reservation resa;
+  late final Future<bool> checkedCardCounter;
 
   @override
   initState() {
     super.initState();
+
     resa =
         Provider.of<ReservationProvider>(context, listen: false).getResaById();
     _dataToWrite = resa.nfcTag;
+    int roomId =
+        Provider.of<ReservationProvider>(context, listen: false).getRoomId();
+    checkedCardCounter = ReservationApi().checkCardCounter(roomId);
     writeData(_dataToWrite);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const VulcanAppBar(title: 'Ecrire une clé'),
-      body: Container(
-        width: MediaQuery.of(context)
-            .size
-            .width, // Définir la largeur à la largeur de l'écran
-        color: const Color(0xFF607D8B),
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                "reservation n${resa.id} \n chambre n${resa.room.number}",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              const Icon(
-                Icons.nfc,
-                color: Color(0xFF455A64),
-                size: 128,
-              ),
-              const Text(
-                'Mettre la carte sur le téléphone',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+        appBar: const VulcanAppBar(title: 'Ecrire une clé'),
+        body: FutureBuilder<bool>(
+          future: checkedCardCounter,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              bool mesCouilles = snapshot.data!;
+              print('zizi : ${mesCouilles}');
+              if (mesCouilles) {
+                return Container(
+                  width: MediaQuery.of(context)
+                      .size
+                      .width, // Définir la largeur à la largeur de l'écran
+                  color: const Color(0xFF607D8B),
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "reservation n${resa.id} \n chambre n${resa.room.number}",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const Icon(
+                          Icons.nfc,
+                          color: Color(0xFF455A64),
+                          size: 128,
+                        ),
+                        const Text(
+                          'Mettre la carte sur le téléphone',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              } else {
+                return const VulcanAlertDialog(
+                    textAlert: 'trop de carte enfoiré');
+              }
+            }
+
+            return const Center(child: CircularProgressIndicator());
+          },
+        ));
   }
 
   Future<NfcTag?> scannedTag = Future.value(null);
