@@ -26,7 +26,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
   void initState() {
     super.initState();
     // SimultationApi simApi = new SimultationApi();
-    reservationCarrier = ReservationApi().getRollingReservation();
+    reservationCarrier = ReservationApi().getRollingReservation(false);
   }
 
   // @override

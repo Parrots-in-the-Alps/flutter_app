@@ -23,7 +23,7 @@ class _RoomListState extends State<RoomList> {
   void initState() {
     super.initState();
     // SimultationApi simApi = new SimultationApi();
-    reservationCarrier = ReservationApi().getRollingReservation();
+    reservationCarrier = ReservationApi().getRollingReservation(true);
   }
 
   // @override
