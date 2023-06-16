@@ -40,10 +40,9 @@ class _SimulationValidatedState extends State<SimulationValidated> {
             child: FutureBuilder<bool>(
                 future: isOpen,
                 builder: (context, snapshot) {
-                  print(snapshot);
-                  print("zungugugu");
+                  print("snapshot: $snapshot");
                   if (snapshot.hasData) {
-                    print("prout stp");
+                    print("hasData");
                     if (snapshot.data! == true) {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -79,8 +78,8 @@ class _SimulationValidatedState extends State<SimulationValidated> {
                       return const SimulationFailed();
                     }
                   } else if (snapshot.hasError) {
-                    print("snapshot data:\n");
-                    print(snapshot);
+                    print("hasError");
+                    print("snapshot $snapshot");
                     return const VulcanAlertDialog(textAlert: "erreur");
                   }
                   return const Center(child: CircularProgressIndicator());

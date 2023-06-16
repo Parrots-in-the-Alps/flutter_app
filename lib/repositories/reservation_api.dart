@@ -20,14 +20,8 @@ class ReservationApi {
     var response = await http.post(
         Uri.parse("https://vulcan-7bh9.onrender.com/api/validateresa"),
         body: {"reservation_id": reservationId});
-    print('zizi');
     if (response.statusCode == 203) {
-      print('zozo');
-      print('zuzu');
-      print(response.body);
       TagCarrier tag = tagCarrierFromJson(response.body);
-      print(tag.nfcTag);
-      print('zuzu2');
       return tag.nfcTag;
     } else {
       return "open nee nooor";
@@ -45,11 +39,9 @@ class ReservationApi {
   }
 
   Future<bool> setNfcTag(String nfcTag, int roomId) async {
-    print('avant appel');
     var response = await http.post(
         Uri.parse("https://vulcan-7bh9.onrender.com/api/setNfc"),
         body: {"room_id": roomId.toString(), "nfc_tag": nfcTag});
-    print('après appel');
     if (response.statusCode == 203) {
       return true;
     }

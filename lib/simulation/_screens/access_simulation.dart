@@ -8,6 +8,8 @@ import 'package:vulcan_mobile_app/simulation/_screens/simulation_failed.dart';
 import 'package:vulcan_mobile_app/simulation/_screens/simulation_validated.dart';
 import 'package:vulcan_mobile_app/utils/vulcan_app_bar.dart';
 
+import '../../nfc_helpers/record_infos.dart';
+
 class AccessSimulation extends StatefulWidget {
   const AccessSimulation({super.key});
 
@@ -98,14 +100,32 @@ class _AccessSimulationState extends State<AccessSimulation> {
         );
       }, onDiscovered: (NfcTag tag) async {
         setState(() {
-          _scannedTag = Future.value(tag);
-          Provider.of<SimulationProvider>(context, listen: false).nfcTag =
-              _scannedTag.toString();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const SimulationValidated()),
-          );
+          // _scannedTag = Future.value(tag);
+          var tech = Ndef.from(tag);
+          if (tech is Ndef) {
+            final cachedMessage = tech.cachedMessage;
+            if (cachedMessage != null) {
+              for (var i in Iterable.generate(cachedMessage.records.length)) {
+                final record = cachedMessage.records[i];
+                final record0 = Record.fromNdef(record);
+                if (record0 is WellknownTextRecord) {
+                  Provider.of<SimulationProvider>(context, listen: false)
+                      .nfcTag = record0.text;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SimulationValidated()),
+                  );
+                } else {
+                  throw Exception("NFC: record is not WellknownTextRecord");
+                }
+              }
+            } else {
+              throw Exception("cachedMessage NFC is null");
+            }
+          } else {
+            throw Exception("Ndef error");
+          }
         });
         NfcManager.instance.stopSession();
       });

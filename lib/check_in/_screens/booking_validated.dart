@@ -36,20 +36,13 @@ class _BookingValidatedState extends State<BookingValidated> {
             child: FutureBuilder<String>(
                 future: nfcTag0,
                 builder: (context, snapshot) {
-                  print("zungugugu");
                   if (snapshot.hasData) {
-                    print("prout stp");
                     final String nfcTag = snapshot.data!;
                     bool setOk =
                         Provider.of<ReservationProvider>(context, listen: false)
                             .setReservationNfcTag(nfcTag);
 
                     if (setOk) {
-                      print(Provider.of<ReservationProvider>(context,
-                              listen: false)
-                          .reservations
-                          .reservations[0]
-                          .nfcTag);
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
