@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
                 MenuButton(
                     text: 'Ecrire une clé', destination: ListingReservation()),
                 MenuButton(
-                    text: 'Simulation', destination: RoomList(buttonTitle: 'Simuler l\'accès', widgetRedirection: AccessSimulation())),
+                    text: 'Simulation', destination: RoomList()),
               ],
             ),
           ),
